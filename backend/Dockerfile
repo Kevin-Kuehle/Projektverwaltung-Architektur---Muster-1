@@ -11,6 +11,8 @@ ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade pip
 
 RUN pip install djangorestframework
+RUN pip install django-cors-headers
+
 
 COPY ./requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r requirements.txt

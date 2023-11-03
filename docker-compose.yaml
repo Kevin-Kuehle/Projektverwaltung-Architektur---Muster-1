@@ -1,4 +1,7 @@
 version: "3"
+networks:
+  test-network:
+    driver: bridge
 services:
   test-frontend:
     image: test-frontend
@@ -8,10 +11,16 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+      - "443:443"
     volumes:
       - ./frontend:/usr/src/app
+      - ./frontend:/usr/src/app/node_modules
+    networks:
+      - test-network
     depends_on:
       - test-backend
+    environment:
+      - BACKEND_URL=http://test-backend:8000
   test-backend:
     image: test-backend
     container_name: test-backend
@@ -21,6 +30,8 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./backend:/usr/src/app
+    networks:
+      - test-network
     ports:
       - "8000:8000"
     environment:
