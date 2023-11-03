@@ -40,7 +40,12 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    host: true /* important to work with Docker */,
     strictPort: true,
+    hmr: {
+      port: 443,
+    },
+    watch: {
+      usePolling: true,
+    },
   },
 });

@@ -57,6 +57,7 @@
             size="x-large"
             target="_blank"
             variant="flat"
+            @click="clickHandler"
           >
             <v-icon
               icon="mdi-send"
@@ -93,5 +94,12 @@
 </template>
 
 <script setup>
-  //
+  const clickHandler = () => {
+    
+    const url = "https://test-backend:8000";
+    
+    fetch(url, {signal: AbortSignal.timeout(5000)}).then( response => {
+      console.log('Devlog: response', response);
+    })
+  }
 </script>
