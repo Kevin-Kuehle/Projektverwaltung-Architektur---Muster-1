@@ -89,17 +89,38 @@
           </v-btn>
         </v-col>
       </v-row>
+      <v-row v-if="responseData">
+        {{responseData}}
+      </v-row>
     </v-responsive>
   </v-container>
 </template>
 
 <script setup>
+  import { ref } from 'vue';
+
+  const responseData = ref(null);
+
   const clickHandler = () => {
     
-    const url = "https://test-backend:8000";
+    const url = "http://localhost:8000/?format=json";
+    const options = {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+  },
+    }
     
-    fetch(url, {signal: AbortSignal.timeout(5000)}).then( response => {
-      console.log('Devlog: response', response);
+    fetch(url, { ...options }).then( response => {
+
+      if (response.ok) {
+        response.json().then( data => {
+          responseData.value = data;
+            console.log('Devlog: data', data);
+        })
+      } else {
+        responseData.value = response
+      }
     })
   }
 </script>
