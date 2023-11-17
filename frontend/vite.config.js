@@ -39,10 +39,10 @@ export default defineConfig({
     extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
   },
   server: {
+    host: "0.0.0.0",
     port: 3000,
-    strictPort: true,
     hmr: {
-      port: 443,
+      clientPort: 3001,
     },
     watch: {
       usePolling: true,

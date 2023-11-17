@@ -10,17 +10,16 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
-      - "443:443"
+      - "3001:3000"
     volumes:
-      - ./frontend:/usr/src/app
-      - ./frontend:/usr/src/app/node_modules
+      - ./frontend:/usr/src/app/
     networks:
       - test-network
     depends_on:
       - test-backend
     environment:
-      - BACKEND_URL=http://test-backend:8000
+      CHOKIDAR_USEPOLLING: true
+    command: ["npm", "run",  "dev"]
   test-backend:
     image: test-backend
     container_name: test-backend

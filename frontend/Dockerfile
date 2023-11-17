@@ -10,7 +10,4 @@ RUN npm install
 COPY . .
 
 # port to expose to the outside world
-EXPOSE 3000
-
-# command to run the application
-CMD ["npm", "run", "dev" ]
+EXPOSE 3001
